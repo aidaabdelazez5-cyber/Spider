@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spider-Man | Apology Network for Ahmed</title>
+  <style>
+    :root {
+      --spidey-red: #e62429;
+      --spidey-blue: #0984e3;
+      --spidey-dark: #0f111a;
+      --spidey-card: #181b28;
+      --text-glow: 0 0 12px rgba(230, 36, 41, 0.6);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--spidey-dark);
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 50px;
+    }
+
+    /* ---------------- PAGE 1: WEB INTRO ---------------- */
+    #page-intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    #web-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .intro-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.85);
+      animation: heroAppear 0.8s ease-out 1.2s forwards;
+    }
+
+    .intro-content h1 {
+      font-size: 5rem;
+      font-family: 'Impact', sans-serif;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--spidey-red);
+      text-shadow: 0 0 20px rgba(230, 36, 41, 0.8), 3px 3px 0px var(--spidey-blue);
+    }
+
+    .enter-btn {
+      margin-top: 25px;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--spidey-red), #b31217);
+      border: 2px solid var(--spidey-blue);
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(230, 36, 41, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .enter-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 25px rgba(9, 132, 227, 0.8);
+      background: linear-gradient(135deg, var(--spidey-blue), #076bba);
+    }
+
+    @keyframes heroAppear {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* ---------------- PAGE 2: AHMED'S APOLOGY DASHBOARD ---------------- */
+    #page-dashboard {
+      display: none;
+      opacity: 0;
+      padding: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      transition: opacity 0.8s ease;
+    }
+
+    /* Top Bar Header */
+    .nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background: linear-gradient(90deg, #181b28, #1a233a);
+      border-left: 6px solid var(--spidey-red);
+      border-right: 6px solid var(--spidey-blue);
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-header h2 {
+      font-size: 2.2rem;
+      font-family: 'Impact', sans-serif;
+      letter-spacing: 3px;
+      color: var(--spidey-red);
+      text-shadow: var(--text-glow);
+    }
+
+    .status-badge {
+      background: rgba(9, 132, 227, 0.2);
+      border: 1px solid var(--spidey-blue);
+      color: #00cec9;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    /* Grid Layouts */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 25px;
+      margin-bottom: 25px;
+    }
+
+    .triple-board-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    /* Cards */
+    .dash-card {
+      background-color: var(--spidey-card);
+      border-radius: 16px;
+      padding: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .board-header {
+      color: var(--spidey-blue);
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      font-weight: bold;
+      border-bottom: 2px solid #262a3d;
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Side Panel Stats */
+    .stat-item {
+      margin-bottom: 20px;
+    }
+
+    .stat-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      color: #a0a5b5;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background-color: #262a3d;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--spidey-red), var(--spidey-blue));
+    }
+
+    /* Input Forms & Buttons */
+    .board-form {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .board-form input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 2px solid #262a3d;
+      background-color: #0f111a;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .board-form input:focus {
+      border-color: var(--spidey-blue);
+    }
+
+    .add-btn {
+      padding: 0 16px;
+      background: var(--spidey-red);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .add-btn:hover {
+      background: #c01317;
+    }
+
+    /* Message Bubbles */
+    .msg-bubble {
+      background: linear-gradient(135deg, #1f2436, #161926);
+      padding: 12px 16px;
+      border-radius: 10px;
+      border-left: 4px solid var(--spidey-red);
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .pin-icon {
+      color: #ffd700;
+      margin-right: 6px;
+    }
+
+    /* Favorite People List */
+    .person-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #0f111a;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border-left: 3px solid var(--spidey-blue);
+    }
+
+    .avatar-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--spidey-red), var(--spidey-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    /* Spider-Man Image Gallery */
+    .img-display-container {
+      width: 100%;
+      height: 200px;
+      background-color: #0f111a;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed #262a3d;
+    }
+
+    .img-display-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: SPIDERWEB INTRO -->
+  <div id="page-intro">
+    <canvas id="web-canvas"></canvas>
+    <div class="intro-content">
+      <h1>Spider-Man</h1>
+      <p style="letter-spacing: 2px; color: #a0a5b5;">FOR AHMED // SPECIAL DISPATCH</p>
+      <button class="enter-btn" onclick="openDashboard()">Enter The Hub</button>
+    </div>
+  </div>
+
+  <!-- PAGE 2: APOLOGY DASHBOARD FOR AHMED -->
+  <div id="page-dashboard">
+    <div class="nav-header">
+      <h2>SPIDER-HUB // APOLOGY FOR AHMED 🕷️</h2>
+      <div class="status-badge">● APOLOGY DISPATCH ACTIVE</div>
+    </div>
+
+    <!-- MAIN GRID SECTION -->
+    <div class="dashboard-grid">
+      <!-- Apology Status Diagnostics -->
+      <div class="dash-card">
+        <h3 style="color: var(--spidey-red); margin-bottom: 20px;">APOLOGY DIAGNOSTICS</h3>
+        
+        <div class="stat-item">
+          <div class="stat-label"><span>Forgiveness Meter</span><span>100% Needed</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-label"><span>Friendship Bond</span><span>Unbreakable 💙</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 100%; background: var(--spidey-blue);"></div></div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-label"><span>Regret Level</span><span>Maximum</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 100%; background: #00cec9;"></div></div>
+        </div>
+      </div>
+
+      <!-- Live Messages for Ahmed -->
+      <div class="dash-card">
+        <div class="board-header">APOLOGY MESSAGES BOARD</div>
+        <form class="board-form" onsubmit="postMessage(event)">
+          <input type="text" id="msg-input" placeholder="Write an apology message to Ahmed..." required />
+          <button type="submit" class="add-btn">SEND</button>
+        </form>
+
+        <div id="message-feed" style="max-height: 250px; overflow-y: auto;">
+          <div class="msg-bubble">
+            <div style="font-size: 0.8rem; color: var(--spidey-blue); margin-bottom: 4px; font-weight: bold;">SPECIAL MESSAGE</div>
+            <div>I'm so sorry Ahmed! Even Spider-Man makes mistakes </div>
+          </div>
+          <div class="msg-bubble" style="border-left-color: var(--spidey-blue);">
+            <div style="font-size: 0.8rem; color: var(--spidey-red); margin-bottom: 4px; font-weight: bold;">SPIDEY DISPATCH</div>
+            <div>With great friendship comes great responsibility. </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRIPLE BOARDS SECTION -->
+    <div class="triple-board-grid">
+
+      <!-- 1. PINNED APOLOGY NOTES BOARD -->
+      <div class="dash-card">
+        <div class="board-header">
+          <span>📌 PINNED APOLOGY NOTES</span>
+        </div>
+        <form class="board-form" onsubmit="addPinnedMessage(event)">
+          <input type="text" id="pin-input" placeholder="Pin a note for Ahmed..." required />
+          <button type="submit" class="add-btn">PIN</button>
+        </form>
+        <div id="pinned-feed">
+          <div class="msg-bubble" style="border-left-color: #ffd700;">
+            <div><span class="pin-icon">📌</span><strong>NOTE FOR AHMED:</strong> You are the best friend ever and I promise to make it up to you! 🕷️✨</div>
+          </div>
+        </div>
+      </div>
+
+   
+
+      <!-- 3. BEST SPIDER-MAN / MEMORY IMAGE BOARD -->
+      <div class="dash-card">
+        <div class="board-header">
+          <span>🖼️  SPIDER-MAN </span>
+        </div>
+        <form class="board-form" onsubmit="updateSpideyImage(event)">
+          <input type="url" id="img-input" placeholder="Paste image URL for Ahmed..." required />
+          <button type="submit" class="add-btn">SET</button>
+        </form>
+        <div class="img-display-container">
+          <img id="spidey-img-display" src="Spider (2).jpg" alt="Spider-Man Shot" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    /* ----- 1. CANVAS SPIDERWEB ANIMATION ----- */
+    const canvas = document.getElementById('web-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const numSpokes = 12;
+    const numRings = 7;
+    const maxRadius = Math.max(width, height) * 0.7;
+    let progress = 0;
+
+    function drawWeb() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
+      ctx.shadowBlur = 8;
+      ctx.lineWidth = 1.5;
+
+      const currentRadius = maxRadius * progress;
+
+      for (let i = 0; i < numSpokes; i++) {
+        const angle = (i * 2 * Math.PI) / numSpokes;
+        const x = centerX + Math.cos(angle) * currentRadius;
+        const y = centerY + Math.sin(angle) * currentRadius;
+
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
+
+      for (let r = 1; r <= numRings; r++) {
+        const ringRadius = (maxRadius / numRings) * r;
+        if (ringRadius > currentRadius) continue;
+
+        ctx.beginPath();
+        for (let i = 0; i <= numSpokes; i++) {
+          const angle = (i * 2 * Math.PI) / numSpokes;
+          const prevAngle = ((i - 1) * 2 * Math.PI) / numSpokes;
+          const midAngle = (angle + prevAngle) / 2;
+          
+          const x = centerX + Math.cos(angle) * ringRadius;
+          const y = centerY + Math.sin(angle) * ringRadius;
+
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            const controlX = centerX + Math.cos(midAngle) * (ringRadius * 0.88);
+            const controlY = centerY + Math.sin(midAngle) * (ringRadius * 0.88);
+            ctx.quadraticCurveTo(controlX, controlY, x, y);
+          }
+        }
+        ctx.stroke();
+      }
+
+      if (progress < 1) {
+        progress += 0.03;
+        requestAnimationFrame(drawWeb);
+      }
+    }
+
+    window.onload = drawWeb;
+
+    /* ----- 2. PAGE TRANSITION ----- */
+    function openDashboard() {
+      const intro = document.getElementById('page-intro');
+      const dash = document.getElementById('page-dashboard');
+
+      intro.style.opacity = '0';
+      intro.style.transform = 'scale(1.1)';
+
+      setTimeout(() => {
+        intro.style.display = 'none';
+        dash.style.display = 'block';
+        setTimeout(() => {
+          dash.style.opacity = '1';
+        }, 50);
+      }, 800);
+    }
+
+    /* ----- 3. DASHBOARD ACTIONS ----- */
+    function postMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('msg-input');
+      const feed = document.getElementById('message-feed');
+      if (!input.value.trim()) return;
+
+      const item = document.createElement('div');
+      item.className = 'msg-bubble';
+      item.innerHTML = `<div style="font-size: 0.8rem; color: var(--spidey-blue); margin-bottom: 4px; font-weight: bold;">APOLOGY NOTE</div><div>${escapeHtml(input.value)}</div>`;
+      feed.prepend(item);
+      input.value = '';
+    }
+
+    function addPinnedMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('pin-input');
+      const feed = document.getElementById('pinned-feed');
+      if (!input.value.trim()) return;
+
+      const item = document.createElement('div');
+      item.className = 'msg-bubble';
+      item.style.borderLeftColor = '#ffd700';
+      item.innerHTML = `<div><span class="pin-icon">📌</span>${escapeHtml(input.value)}</div>`;
+      feed.prepend(item);
+      input.value = '';
+    }
+
+    function addFavoritePerson(e) {
+      e.preventDefault();
+      const input = document.getElementById('person-input');
+      const feed = document.getElementById('people-feed');
+      const name = input.value.trim();
+      if (!name) return;
+
+      const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || 'SP';
+
+      const item = document.createElement('div');
+      item.className = 'person-card';
+      item.innerHTML = `
+        <div class="avatar-circle">${initials}</div>
+        <div><strong>${escapeHtml(name)}</strong> <span style="font-size: 0.8rem; color: #a0a5b5; display: block;">Spider-Ally</span></div>
+      `;
+      feed.prepend(item);
+      input.value = '';
+    }
+
+    function updateSpideyImage(e) {
+      e.preventDefault();
+      const input = document.getElementById('img-input');
+      const imgDisplay = document.getElementById('spidey-img-display');
+      if (!input.value.trim()) return;
+
+      imgDisplay.src = input.value.trim();
+      input.value = '';
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+      });
+    }
+  </script>
+</body>
+</html>
